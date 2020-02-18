@@ -1,5 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
+import store from "./store";
+import { Provider } from "react-redux";
+import UserList from './components/UserList';
 import './App.css';
 
 const dataList = [
@@ -9,39 +11,43 @@ const dataList = [
   {'id': 4, 'name': 'José', 'city': 'Ciudad de México'}
 ];
 
-function App() {
+const App = () => {
+
   return (
-    <div className="App container">
-      <div className="row">
-        <div className="col-md-6 container pt-5">
-          <h3 className="text-left">Listado</h3>
-          {
-            dataList.map(data=>(
-              <div key={data.id} style={{ 'border': '1px solid #eee' }}>
-                <h4>{data.name}</h4>
-                <p>{data.city}</p>
+    <Provider store={store}>
+      <UserList />
+      <div className="App container">
+        <div className="row">
+          <div className="col-md-6 container pt-5">
+            <h3 className="text-left">Listado</h3>
+            {
+              dataList.map(data=>(
+                <div key={data.id} style={{ 'border': '1px solid #eee' }}>
+                  <h4>{data.name}</h4>
+                  <p>{data.city}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div className="col-md-6 container pt-5">
+            <div className="card form-group">
+              <div className="card-body">
+                <h3>Formulario</h3>
+                <div className="form-group text-left">
+                  <label htmlFor="name">Nombre</label>
+                  <input type="text" className="form-control mb-3" id="name" name="name" />
+                </div>
+                <div className="form-group text-left">
+                  <label htmlFor="city">Ciudad</label>
+                  <input type="text" className="form-control mb-3" id="city" name="city" />
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
               </div>
-            ))
-          }
-        </div>
-        <div className="col-md-6 container pt-5">
-          <div className="card form-group">
-            <div className="card-body">
-              <h3>Formulario</h3>
-              <div class="form-group text-left">
-                <label for="name">Email address</label>
-                <input type="text" className="form-control mb-3" id="name" name="name" />
-              </div>
-              <div class="form-group text-left">
-                <label for="city">Ciudad</label>
-                <input type="text" className="form-control mb-3" id="city" name="city" />
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Provider>
   );
 }
 
