@@ -3,11 +3,27 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getUsers } from '../actions/userActions';
 
-const UserList = ({ getUsers }) => {
+const UserList = ({ getUsers, users }) => {
 	useEffect(() => {
 		getUsers()
 	}, [])
-	return <h1>Hola</h1>;
+
+	if (users.length <= 0) 
+		return <div className="text-muted">No hay usuarios</div>
+
+	return (
+		<div>
+			<h1>Usuarios: {users.length}</h1>
+			{
+	          users.map(data=>(
+	            <div key={data.id} style={{ 'border': '1px solid #eee' }}>
+	              <h4>{data.name}</h4>
+	              <p>{data.city}</p>
+	            </div>
+	          ))
+	        }
+	    </div>
+	)
 }
 
 UserList.propTypes = {

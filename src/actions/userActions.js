@@ -21,6 +21,7 @@ export const getUsers = () => async dispatch => {
     // const data = await res.json();
     // dispatch({ type: GET_USERS, payload: data });
   } catch (error) {
+    console.log(error);
     dispatch({ type: USERS_ERROR, payload: error.response.statusText });
   }
 };
