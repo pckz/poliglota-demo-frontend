@@ -11,7 +11,7 @@ const UserList = ({ getUsers, users, loading }) => {
 	if (loading)
 		return (<div className="text-muted">Cargando usuarios</div>)
 
-	if (users.length == 0) 
+	if (users.length === 0) 
 		return <div className="text-muted">No hay usuarios</div>
 
 	return (

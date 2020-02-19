@@ -5,10 +5,6 @@ import PropTypes from "prop-types";
 import { getUsers, addUser, getLocations } from '../actions/userActions';
 import Autosuggest from 'react-autosuggest';
 
-const locations_suggest = []
-
-
-
 const UserForm = ({ addUser, getLocations, loading, locations, getUsers, users }) => {
 
 	const [name, setName] = useState("");
