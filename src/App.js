@@ -16,8 +16,8 @@ const App = () => {
             <h3 className="text-left">Listado</h3>
             <UserList />
           </div>
-          <div className="col-md-6 container pt-5">
-            <div className="card form-group">
+          <div className="col-md-6 container pt-5 mt-5">
+            <div className="card form-group mt-4">
               <div className="card-body">
                 <h3>Formulario</h3>
                 <UserForm />

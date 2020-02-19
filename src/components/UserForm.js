@@ -9,7 +9,7 @@ const locations_suggest = []
 
 
 
-const UserForm = ({ addUser, getLocations, loading, locations, getUsers }) => {
+const UserForm = ({ addUser, getLocations, loading, locations, getUsers, users }) => {
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -61,7 +61,7 @@ const UserForm = ({ addUser, getLocations, loading, locations, getUsers }) => {
 		} else {
 			console.log(name)
 			console.log(email)
-			console.log( value)
+			console.log(value)
 			
 			addUser({ name, email, city: value });
 
@@ -72,7 +72,7 @@ const UserForm = ({ addUser, getLocations, loading, locations, getUsers }) => {
 
 			// We update current data
 			getLocations();
-			getUsers();
+			//getUsers();
 
 		}
 	};
@@ -126,16 +126,20 @@ UserForm.propTypes = {
 	getLocations: PropTypes.func.isRequired,
 	locations: PropTypes.array.isRequired,
 	loading: PropTypes.bool.isRequired,
+	getUsers: PropTypes.func.isRequired,
+	users: PropTypes.array.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
 	addUser: data => dispatch(addUser(data)),
-	getLocations: () => dispatch(getLocations())
+	getLocations: () => dispatch(getLocations()),
+	getUsers: () => dispatch(getUsers())
 })
 
 const mapStateToProps = state => ({
 	locations: state.user.locations,
 	loading: state.user.loading,
+	users: state.user.users,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserForm);

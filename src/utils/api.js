@@ -2,11 +2,13 @@ import axios from "axios";
 
 var api = axios.create({
   baseURL:
-    process.env.NODE_ENV === "production"
-      ? "https://poliglota-demo-backend.herokuapp.com"
-      : "http://localhost:3000",
+  	process.env.NODE_ENV == null
+      ? "http://localhost:3000"
+      : "https://poliglota-demo-backend.herokuapp.com",
+  crossDomain : true,
   headers: {
-    "Content-Type": "application/json"
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
   }
 });
 

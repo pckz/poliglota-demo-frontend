@@ -40,11 +40,19 @@ export const addUser = user => async dispatch => {
     //setLoading();
     dispatch({ type: SET_LOADING })
 
-    const res = await api.post("/users", user);
-    console.log('@todo: sacar data de res', res);
+    const res = await api.post("/users", 
+      {
+        user: {
+          name: user.name,
+          email: user.email
+        },
+        location: {
+          name: user.city
+        }
+      }
+    );
     
-    // const data = res.data
-    // dispatch({ type: ADD_USER, payload: data })
+    dispatch({ type: ADD_USER, payload: res.data.data })
 
   } catch (error) {
     console.log(error)
@@ -124,7 +132,6 @@ export const getLocations = () => async dispatch => {
   try {
     setLoading();
     const res = await api.get('/locations');
-    console.log('locationsss')
     console.log(res);
 
     dispatch({ type: GET_LOCATIONS, payload: res.data });

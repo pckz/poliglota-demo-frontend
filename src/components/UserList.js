@@ -19,8 +19,8 @@ const UserList = ({ getUsers, users, loading }) => {
 			<div className="text-muted mb-2">Usuarios: {users.length}</div>
 			{
 	          users.map((data)=>(
-	            <div className="p-3" key={data.id} style={{ 'border': '1px solid #eee' }}>
-	              <h4>{data.attributes.name}</h4>
+	            <div className="pt-3" key={data.id} style={{ 'border': '1px solid #eee' }}>
+	              <h4 title={data.attributes.email}>#{data.id} {data.attributes.name}</h4>
 	              <p>{data.attributes.city}</p>
 	            </div>
 	          ))
