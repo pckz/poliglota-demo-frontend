@@ -1,24 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getUsers } from '../actions/userActions';
 
-const UserList = ({ getUsers, users }) => {
+const UserList = ({ getUsers, users, loading }) => {
 	useEffect(() => {
 		getUsers()
 	}, [])
 
-	if (users.length <= 0) 
+	if (loading)
+		return (<div className="text-muted">Cargando usuarios</div>)
+
+	if (users.length == 0) 
 		return <div className="text-muted">No hay usuarios</div>
 
 	return (
 		<div>
-			<h1>Usuarios: {users.length}</h1>
+			<div className="text-muted mb-2">Usuarios: {users.length}</div>
 			{
-	          users.map(data=>(
-	            <div key={data.id} style={{ 'border': '1px solid #eee' }}>
-	              <h4>{data.name}</h4>
-	              <p>{data.city}</p>
+	          users.map((data)=>(
+	            <div className="p-3" key={data.id} style={{ 'border': '1px solid #eee' }}>
+	              <h4>{data.attributes.name}</h4>
+	              <p>{data.attributes.city}</p>
 	            </div>
 	          ))
 	        }
@@ -29,6 +32,7 @@ const UserList = ({ getUsers, users }) => {
 UserList.propTypes = {
 	users: PropTypes.array.isRequired,
 	getUsers: PropTypes.func.isRequired,
+	loading: PropTypes.bool.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -37,6 +41,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
 	users: state.user.users,
+	loading: state.user.loading,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);

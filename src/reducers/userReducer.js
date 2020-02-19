@@ -7,11 +7,13 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_USER,
-  SEARCH_USERS
+  SEARCH_USERS,
+  GET_LOCATIONS,
 } from "../actions/types";
 
 const initialState = {
   users: [],
+  locations: [],
   current: null,
   loading: false,
   error: null
@@ -67,6 +69,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case GET_LOCATIONS:
+      return {
+        ...state,
+        locations: action.payload,
+        loading: false
       };
     default:
       return state;

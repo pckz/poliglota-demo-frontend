@@ -8,3 +8,4 @@ export const CLEAR_USERS = "CLEAR_USERS";
 export const SET_LOADING = "SET_LOADING";
 export const USERS_ERROR = "USERS_ERROR";
 export const SEARCH_USERS = "SEARCH_USERS";
+export const GET_LOCATIONS = "GET_LOCATIONS";

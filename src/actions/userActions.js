@@ -7,7 +7,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_USER,
-  SEARCH_USERS
+  SEARCH_USERS,
+  GET_LOCATIONS
 } from "./types";
 
 import api from '../utils/api';
@@ -16,10 +17,16 @@ import api from '../utils/api';
 export const getUsers = () => async dispatch => {
   try {
     setLoading();
-    const res = await api.get('/users');//fetch("/users");
+    const res = await api.get('/users');
     console.log(res);
-    // const data = await res.json();
-    // dispatch({ type: GET_USERS, payload: data });
+    
+    var data = [];
+
+    if (res && res.data && res.data.data) 
+      data = res.data.data;
+
+    dispatch({ type: GET_USERS, payload: data });
+
   } catch (error) {
     console.log(error);
     dispatch({ type: USERS_ERROR, payload: error.response.statusText });
@@ -28,19 +35,20 @@ export const getUsers = () => async dispatch => {
 
 // ADD NEW USER
 export const addUser = user => async dispatch => {
-  try {
-    setLoading();
-    const res = await fetch("/users", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const data = await res.json();
-    dispatch({ type: ADD_USER, payload: data });
+  try { 
+
+    //setLoading();
+    dispatch({ type: SET_LOADING })
+
+    const res = await api.post("/users", user);
+    console.log('@todo: sacar data de res', res);
+    
+    // const data = res.data
+    // dispatch({ type: ADD_USER, payload: data })
+
   } catch (error) {
-    dispatch({ type: USERS_ERROR, payload: error.response.data });
+    console.log(error)
+    //dispatch({ type: USERS_ERROR, payload: error.response.data });
   }
 };
 
@@ -109,3 +117,20 @@ export const setLoading = () => {
 };
 
 export const usersError = () => {};
+
+// HELPER
+// GET USERS
+export const getLocations = () => async dispatch => {
+  try {
+    setLoading();
+    const res = await api.get('/locations');
+    console.log('locationsss')
+    console.log(res);
+
+    dispatch({ type: GET_LOCATIONS, payload: res.data });
+
+  } catch (error) {
+    console.log(error);
+    //dispatch({ type: USERS_ERROR, payload: error.response.statusText });
+  }
+};

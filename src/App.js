@@ -5,12 +5,6 @@ import UserList from './components/UserList';
 import UserForm from './components/UserForm';
 import './App.css';
 
-const dataList = [
-  {'id': 1, 'name': 'Poliglotón', 'city': 'Santiago'},
-  {'id': 2, 'name': 'Carlos', 'city': 'Santiago'},
-  {'id': 3, 'name': 'Nicolás', 'city': 'Lima'},
-  {'id': 4, 'name': 'José', 'city': 'Ciudad de México'}
-];
 
 const App = () => {
 
